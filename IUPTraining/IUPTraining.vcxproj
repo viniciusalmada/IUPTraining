@@ -69,7 +69,14 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>T:\lib\mgeo\iup\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ExecutablePath>$(VS_ExecutablePath);$(VC_ExecutablePath_x64);$(FxCopDir);$(WindowsSDK_ExecutablePath);$(MSBuild_ExecutablePath);$(PATH);$(ExecutablePath)</ExecutablePath>
+    <ReferencePath>$(OutDir);$(ReferencePath)</ReferencePath>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -85,11 +92,15 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>
+      </SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>T:\lib\mgeo\iup\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>T:\lib\mgeo\iup\lib\dll15_64\iup.lib;T:\lib\mgeo\iup\lib\dll15_64\iupgl.lib;T:\lib\mgeo\iup\lib\dll15_64\iupcd.lib;T:\lib\mgeo\iup\lib\dll15_64\Lua53\iuplua53.lib;T:\lib\mgeo\iup\lib\dll15_64\iupcontrols.lib;T:\lib\mgeo\iup\lib\dll15_64\Lua53\iupluacontrols53.lib;T:\lib\mgeo\iup\lib\dll15_64\iupweb.lib;T:\lib\mgeo\iup\lib\dll15_64\iupole.lib;T:\lib\mgeo\iup\lib\dll15_64\iupim.lib;T:\lib\mgeo\iup\lib\dll15_64\Lua53\iupluaim53.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -123,6 +134,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
