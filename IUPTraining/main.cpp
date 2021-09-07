@@ -12,20 +12,18 @@ int main()
 {
   IupOpen(nullptr, nullptr);
 
-  Ihandle* label = IupLabel("Hello world from IUP");
-  Ihandle* button = IupButton("OK", nullptr);
-  Ihandle* vbox = IupVbox(label, button, nullptr);
+  Ihandle* multitext = IupText(nullptr);
+  Ihandle* vbox = IupVbox(multitext, nullptr);
 
-  IupSetAttribute(vbox, "ALIGNMENT", "ACENTER");
-  IupSetAttribute(vbox, "GAP", "10");
-  IupSetAttribute(vbox, "MARGIN", "10x10");
+  IupSetAttribute(multitext, "MULTILINE", "YES");
+  IupSetAttribute(multitext, "EXPAND", "YES");
 
   Ihandle* dlg = IupDialog(vbox);
-  IupSetAttribute(dlg, "TITLE", "Hello world");
-
-  IupSetCallback(button, "ACTION", ButtonExitCb);
+  IupSetAttribute(dlg, "TITLE", "Simple Notepad");
+  IupSetAttribute(dlg, "SIZE", "QUARTERxQUARTER");
 
   IupShowXY(dlg, IUP_CENTER, IUP_CENTER);
+  IupSetAttribute(dlg, "USERSIZE", nullptr);
 
   IupMainLoop();
 
