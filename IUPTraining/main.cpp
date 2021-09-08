@@ -1,4 +1,6 @@
 #include <cstdlib>
+
+#include "NoteDialog.h"
 #include "iup.h"
 
 int ButtonExitCb(Ihandle* self)
@@ -12,18 +14,8 @@ int main()
 {
   IupOpen(nullptr, nullptr);
 
-  Ihandle* multitext = IupText(nullptr);
-  Ihandle* vbox = IupVbox(multitext, nullptr);
-
-  IupSetAttribute(multitext, "MULTILINE", "YES");
-  IupSetAttribute(multitext, "EXPAND", "YES");
-
-  Ihandle* dlg = IupDialog(vbox);
-  IupSetAttribute(dlg, "TITLE", "Simple Notepad");
-  IupSetAttribute(dlg, "SIZE", "QUARTERxQUARTER");
-
-  IupShowXY(dlg, IUP_CENTER, IUP_CENTER);
-  IupSetAttribute(dlg, "USERSIZE", nullptr);
+  const NoteDialog dlg{};
+  dlg.ShowXY(IUP_CENTER, IUP_CENTER);
 
   IupMainLoop();
 
